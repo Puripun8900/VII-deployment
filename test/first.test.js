@@ -1,20 +1,23 @@
-// 1. IMPORT: Adjust the path if utils.js is inside 'src'
-const { isString } = require('../utils'); 
-// If utils.js is in src/, the path might be: require('../src/utils');
+// 1. IMPORT: The function is in the src directory
+// We are using 'require' because Node.js/Jest uses CommonJS modules by default
+const isObject = require('../src/isObject'); 
 
-describe('Utility Functions - isString', () => {
-    // Test Case 1: Testing a positive scenario
-    test('should return true for a string value', () => {
-        expect(isString('hello world')).toBe(true);
+describe('isObject Coverage Test', () => {
+    // Test Case 1: Testing a true scenario
+    test('should return true for a plain object', () => {
+        // Calling the function from the library
+        expect(isObject({})).toBe(true); 
     });
     
-    // Test Case 2: Testing a negative scenario
-    test('should return false for a number value', () => {
-        expect(isString(12345)).toBe(false);
+    // Test Case 2: Testing a false scenario
+    test('should return false for an array', () => {
+        // Calling the function from the library
+        expect(isObject([])).toBe(false); 
     });
 
-    // Test Case 3: Testing an edge case
-    test('should return false for null', () => {
-        expect(isString(null)).toBe(false);
+    // Test Case 3: Testing a primitive type (ensures more lines of code are executed)
+    test('should return false for a string', () => {
+        // Calling the function from the library
+        expect(isObject('hello')).toBe(false); 
     });
 });
