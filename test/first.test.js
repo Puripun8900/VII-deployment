@@ -1,9 +1,20 @@
-// You might need an import statement here later, but for a guaranteed pass, start with this:
+// 1. IMPORT: Adjust the path if utils.js is inside 'src'
+const { isString } = require('../utils'); 
+// If utils.js is in src/, the path might be: require('../src/utils');
 
-describe('Initial Setup Test', () => {
-    // This is the actual test case Jest is looking for
-    test('1 plus 1 equals 2 (placeholder test)', () => {
-        // The 'expect' function performs the assertion
-        expect(1 + 1).toBe(2);
+describe('Utility Functions - isString', () => {
+    // Test Case 1: Testing a positive scenario
+    test('should return true for a string value', () => {
+        expect(isString('hello world')).toBe(true);
+    });
+    
+    // Test Case 2: Testing a negative scenario
+    test('should return false for a number value', () => {
+        expect(isString(12345)).toBe(false);
+    });
+
+    // Test Case 3: Testing an edge case
+    test('should return false for null', () => {
+        expect(isString(null)).toBe(false);
     });
 });
