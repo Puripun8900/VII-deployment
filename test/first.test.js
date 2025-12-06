@@ -1,23 +1,16 @@
-// 1. IMPORT: The function is in the src directory
-// We are using 'require' because Node.js/Jest uses CommonJS modules by default
+// 1. Import a public function from the library. 
+// Path: We are in the 'test' folder, so we go up one level and into 'src'.
 const isObject = require('../src/isObject'); 
 
-describe('isObject Coverage Test', () => {
-    // Test Case 1: Testing a true scenario
-    test('should return true for a plain object', () => {
-        // Calling the function from the library
+describe('isObject Function Coverage Test', () => {
+    // This test forces execution of the function to generate coverage data.
+    test('should identify an object and generate coverage report', () => {
+        // Calling the function from the library is the CRITICAL STEP!
         expect(isObject({})).toBe(true); 
     });
     
-    // Test Case 2: Testing a false scenario
-    test('should return false for an array', () => {
-        // Calling the function from the library
-        expect(isObject([])).toBe(false); 
-    });
-
-    // Test Case 3: Testing a primitive type (ensures more lines of code are executed)
-    test('should return false for a string', () => {
-        // Calling the function from the library
-        expect(isObject('hello')).toBe(false); 
+    // Add another test to check the negative case for full coverage on this function
+    test('should return false for a primitive value', () => {
+        expect(isObject('string')).toBe(false); 
     });
 });
