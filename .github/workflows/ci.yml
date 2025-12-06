@@ -31,14 +31,19 @@ jobs:
       - name: Install dependencies
         run: npm install
         
-      # 4. Run tests and generate LCOV coverage report
+      # 4. Run Jest Tests with Coverage
       - name: Run Jest Tests with Coverage
-        # Using the Jest command directly for simplicity
         run: npm test -- --coverage --coverageReporters=lcov
 
-      # 5. Send coverage report to Coveralls
+      # 4.5. ADD THIS CHECK (Suggested by AI)
+      - name: Check coverage file exists
+        run: |
+          if [ ! -f coverage/lcov.info ]; then
+            echo "🚨 Coverage file not found! Jest failed to generate it."
+            exit 1
+          fi
+          
+      # 5. Send coverage to Coveralls
       - name: Send coverage to Coveralls
         uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: coverage/lcov.info
+        # ... rest of the code ...
